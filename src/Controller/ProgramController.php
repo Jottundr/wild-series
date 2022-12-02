@@ -2,24 +2,30 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Repository\ProgramRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-#[Route('/program', name: 'program')]
+#[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
-    #[Route('/', name: '_index')]
-    public function index(): Response
+    #[Route('/', name: 'index')]
+    public function index(ProgramRepository $programRepository): Response
     {
+        $programs = $programRepository->findAll();
+
         return $this->render('program/index.html.twig', [
-            'website' => 'Wild Series',
+            'programs' => $programs,
         ]);
     }
 
-    #[Route('/{id}', methods: ['GET'], requirements: ['id' => '\d+'], name: '_show')]
-    public function show(int $id): Response
+    #[Route('/{id}', methods: ['GET'], requirements: ['id' => '\d+'], name: 'show')]
+    public function show(int $id, ProgramRepository $programRepository): Response
     {
-        return $this->render('program/show.html.twig', ['id' => $id]);
+        $program = $programRepository->findOneBy(['id' => $id]);
+
+
+        return $this->render('program/show.html.twig', ['id' => $id, 'program' => $program]);
     }
 }

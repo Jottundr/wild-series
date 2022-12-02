@@ -2,6 +2,16 @@
 
 {% block body %}
 
-    <h1>Program {{ id }}.</h1>
+    <h1>{{ program.title }}</h1>
+    <div class="container">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ program.title }}</h5>
+                    <p class="card-text">{{ program.synopsis }}</p>
+                </div>
+            </div>
+        </div>
+
 
 {% endblock %}

@@ -1,25 +1,19 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}
-
-   Wild Series
-
-{% endblock %}
+{% extends "base.html.twig" %}
 
 {% block body %}
 
-   <h1>Series List</h1>
-   {% for program in programs %}
-       <div class="container">
+	<h1>Categorie {{ category.name }}</h1>
+	{% for program in programs %}
+        <div class="container">
             <div class="card" style="width: 18rem;">
                 <img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ program.title }} ({{ program.category.name }})</h5>
+                    <h5 class="card-title">{{ program.title }}</h5>
                     <p class="card-text">{{ program.synopsis }}</p>
                     <a href="/program/{{ program.id }}" class="btn btn-primary">Read more</a>
                 </div>
             </div>
         </div>
-   {% endfor %}
+	{% endfor %}
 
 {% endblock %}
