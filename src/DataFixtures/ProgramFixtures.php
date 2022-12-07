@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
     public const PROGRAMS = [
-        ['title' => 'Breaking Bad', 'synopsis' => 'A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family\'s future.', 'poster' => '', 'category' => 'Action'],
+        ['title' => 'Breaking Bad', 'synopsis' => 'A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student in order to secure his family\'s future.', 'poster' => 'BreakingBad.png', 'category' => 'Action'],
         ['title' => 'Game Of Thrones', 'synopsis' => 'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.', 'poster' => '', 'category' => 'Fantastique'],
         ['title' => 'Stranger Things', 'synopsis' => 'When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.', 'poster' => '', 'category' => 'Aventure'],
         ['title' => 'American Horror Story', 'synopsis' => 'An anthology series centering on different characters and locations, including a house with a murderous past, an insane asylum, a witch coven, a freak show circus, a haunted hotel, a possessed farmhouse, a cult, the apocalypse, a slasher summer camp, a bleak beach town and desert valley, and NYC.', 'poster' => '', 'category' => 'Horreur'],
@@ -25,13 +25,14 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach (self::PROGRAMS as $show) {
+        foreach (self::PROGRAMS as $programInfo) {
             $program = new Program();
-            $program->setTitle($show['title']);
-            $program->setSynopsis($show['synopsis']);
-            $program->setCategory($this->getReference('category_' . $show['category']));
-            $program->setPoster($show['poster']);
+            $program->setTitle($programInfo['title']);
+            $program->setSynopsis($programInfo['synopsis']);
+            $program->setCategory($this->getReference('category_' . $programInfo['category']));
+            $program->setPoster($programInfo['poster']);
             $manager->persist($program);
+            $this->addReference('program_' . $programInfo['title'], $program);
         }
         $manager->flush();
     }

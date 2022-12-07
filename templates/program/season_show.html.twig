@@ -2,21 +2,21 @@
 
 {% block body %}
 
-    <h1>{{ program.title }}</h1>
+        <h1></h1>
     <div class="container">
             <div class="card" style="width: 18rem;">
                 <img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ program.title }}</h5>
-                    <p class="card-text">{{ program.synopsis }}</p>
+                    <p>Saison {{ season.number }} ({{ season.year }})
+                    <p class="card-text">{{ season.description }}</p>
                 </div>
-                <ul>
-                    {% for season in program.seasons %}
-                        <li><a href="/program/{{ program.id }}/season/{{ season.id }}">Saison {{ season.number }}</a></li>
+                 <ul>
+                    {% for episode in episodes %}
+                        <li>Episode {{ episode.number }}</li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-
 
 {% endblock %}
