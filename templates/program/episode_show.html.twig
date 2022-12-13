@@ -2,20 +2,16 @@
 
 {% block body %}
 
-        <h1></h1>
     <div class="container">
             <div class="card" style="width: 18rem;">
                 <img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ program.title }}</h5>
                     <p>Saison {{ season.number }} ({{ season.year }})
-                    <p class="card-text">{{ season.description }}</p>
+                    <h6 class="card-title">Episode {{ episode.number }}</h6>
+                    <p class="card-text">{{ episode.synopsis }}</p>
+                    <a href="#" class="btn btn-primary">Watch Now</a>
                 </div>
-                 <ul class="list-group">
-                    {% for episode in episodes %}
-                        <li class="list-group-item"><a class="list-group-item list-group-item-action" href="/program/{{ program.id }}/season/{{ season.id }}/episode/{{ episode.id }}">Episode {{ episode.number }}: {{ episode.title }}</a></li>
-                    {% endfor %}
-                </ul>
             </div>
         </div>
 

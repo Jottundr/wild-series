@@ -10,9 +10,9 @@
                     <h5 class="card-title">{{ program.title }}</h5>
                     <p class="card-text">{{ program.synopsis }}</p>
                 </div>
-                <ul>
+                <ul class="list-group">
                     {% for season in program.seasons %}
-                        <li><a href="/program/{{ program.id }}/season/{{ season.id }}">Saison {{ season.number }}</a></li>
+                        <li class="list-group-item"><a class="list-group-item list-group-item-action" href="/program/{{ program.id }}/season/{{ season.id }}">Saison {{ season.number }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

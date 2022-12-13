@@ -10,9 +10,10 @@ use Doctrine\Persistence\ObjectManager;
 class SeasonFixtures extends Fixture implements DependentFixtureInterface
 {
     public const SEASONS = [
-        ['number' => '1', 'year' => '2008', 'description' => 'La meilleure saison', 'program' => 'Breaking Bad'],
+        ['number' => '1', 'year' => '2008', 'description' => '', 'program' => 'Breaking Bad'],
         ['number' => '2', 'year' => '2009', 'description' => '', 'program' => 'Breaking Bad'],
         ['number' => '3', 'year' => '2010', 'description' => '', 'program' => 'Breaking Bad'],
+        ['number' => '1', 'year' => '2056', 'description' => '', 'program' => 'Game Of Thrones'],
     ];
 
     public function load(ObjectManager $manager)
@@ -24,7 +25,7 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
             $season->setDescription($seasonInfo['description']);
             $season->setProgram($this->getReference('program_' . $seasonInfo['program']));
             $manager->persist($season);
-            $this->addReference('season_' . $seasonInfo['number'], $season);
+            $this->addReference($seasonInfo['program'] . 'season_' . $seasonInfo['number'] , $season);
         }
         $manager->flush();
     }
