@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Regex;
 
-#[UniqueEntity('title', message: 'Le titre existe déjà')]
+#[UniqueEntity('title', message: 'Ce titre existe déjà')]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program
 {
@@ -22,14 +22,15 @@ class Program
 
     #[Assert\NotBlank(message: 'Le titre est obligatoire')]
     #[Assert\Length(max: 255)]
+
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
     #[Assert\Regex(
         pattern: '/plus belle la vie/',
         match: false,
         message: 'On parle de vraies séries ici'
     )]
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
     #[Assert\NotBlank(message: 'Le synopsis est obligatoire')]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
