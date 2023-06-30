@@ -7,9 +7,7 @@ use App\Form\ProgramType;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
-use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
-use App\Repository\SeasonRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +36,7 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $programRepository->save($program, true);
+            $this->addFlash('success', 'The new program has been created');
         }
 
         return $this->renderForm('program/new.html.twig', ['form' => $form]);

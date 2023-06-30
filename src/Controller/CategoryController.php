@@ -36,6 +36,7 @@ class CategoryController extends AbstractController
         // Was the form submitted ?
         if ($form->isSubmitted()) {
             $categoryRepository->save($category, true);
+            $this->addFlash('success', 'The new category has been created');
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
