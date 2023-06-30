@@ -1,0 +1,9 @@
+<strong>Acteur :
+	{{ actor.name }}</strong>
+<ul>
+	{% for program in actor.programs %}
+		<a href="{{ path('program_show', { id: program.id }) }}">{{ program.title }}</a>
+	{% else %}
+		<li>Aucun série pour cet acteur</li>
+	{% endfor %}
+</ul>

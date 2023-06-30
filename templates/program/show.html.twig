@@ -2,21 +2,32 @@
 
 {% block body %}
 
-    <h1>{{ program.title }}</h1>
-    <div class="container">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ program.title }}</h5>
-                    <p class="card-text">{{ program.synopsis }}</p>
-                </div>
-                <ul class="list-group">
-                    {% for season in program.seasons %}
-                        <li class="list-group-item"><a class="list-group-item list-group-item-action" href="/program/{{ program.id }}/season/{{ season.id }}">Saison {{ season.number }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-
-
+	<h1>{{ program.title }}</h1>
+	<div class="container">
+		<div class="card" style="width: 18rem;">
+			<img src="{{ asset('build/images/' ~ program.poster) }}" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">{{ program.title }}</h5>
+				<p class="card-text">{{ program.synopsis }}</p>
+			</div>
+			<ul class="list-group">
+				{% for season in program.seasons %}
+					<li class="list-group-item">
+						<a class="list-group-item list-group-item-action" href="/program/{{ program.id }}/season/{{ season.id }}">Saison
+							{{ season.number }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<strong>Acteurs :</strong>
+	<ul>
+		{% for actor in program.actors %}
+			<li>
+				<a href="{{ path('actor_show', { id: actor.id }) }}">{{ actor.name }}</a>
+			</li>
+		{% else %}
+			<li>Aucun acteur pour cette série</li>
+		{% endfor %}
+	</ul>
 {% endblock %}
